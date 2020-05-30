@@ -10,6 +10,7 @@ Factory::Factory() : pini(Pini::getInstance(8888,10000, false, this)),
     for (int i = 0; i < names.size(); ++i) {
         workers[1111 + i] = make_shared<Youngster>(names[i], 1111 + i, 15000, true);
     }
+
     // Initialize 5 drugs
     drugs["Propecia"] = make_unique<Drug>("Propecia", 130, 300, 7);
     drugs["Asparnol"] = make_unique<Drug>("Asparnol", 145, 350, 2);
@@ -38,6 +39,10 @@ void Factory::setOpen(bool value) {
 }
 
 void Factory::produceDrug(const string& drugName, double productionCost, double price) {
+    if (productionCost < 0 or price < 0) {
+        cout << NEG_PAR_MSG << endl;
+        return;
+    }
     // Check whether or not the factory can afford to produce the drug
     if (balance >= productionCost)
         balance -= productionCost;
@@ -53,6 +58,10 @@ void Factory::produceDrug(const string& drugName, double productionCost, double 
 }
 
 void Factory::sellDrug(const string& drugName, int amount) {
+    if (amount < 0) {
+        cout << NEG_PAR_MSG << endl;
+        return;
+    }
     auto producedDrug = drugs.find(drugName);
     // Check if the factory has enough units of the requested drug
     if (producedDrug == drugs.end() or producedDrug->second->amount < amount)

@@ -8,6 +8,10 @@ void Pini::lowerSalary(int workerId, double reduction) {
         cout << MISSING_FACTORY_MSG << endl;
         return;
     }
+    else if (reduction < 0) {
+        cout << NEG_REDUCTION_MSG << endl;
+        return;
+    }
     auto worker = factoryPtr->workers[workerId];
     double newSalary = worker->getSalary() - reduction;
 
@@ -28,6 +32,10 @@ void Pini::addWorker(const shared_ptr<BasicWorker>& worker) {
         cout << MISSING_FACTORY_MSG << endl;
         return;
     }
+    if (worker == nullptr) {
+        cout << INVALID_WORKER_MSG << endl;
+        return;
+    }
     factoryPtr->workers[worker->getId()] = worker;
 }
 
@@ -36,7 +44,8 @@ void Pini::fireWorker(int id) {
         cout << MISSING_FACTORY_MSG << endl;
         return;
     }
-    factoryPtr->workers.erase(id);
+    if (!factoryPtr->workers.erase(id))
+        cout << INVALID_WORKER_MSG << endl;
 }
 
 // Pay salaries of all workers out of the factory's balance, if it can afford them

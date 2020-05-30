@@ -8,11 +8,13 @@
 using namespace std;
 
 // 'Pini' class is a Singleton manager-typed class
-class Pini : public BasicWorker{
+class Pini final : public BasicWorker{
 private:
     static constexpr auto MISSING_FACTORY_MSG{"Missing factory pointer."};
     static constexpr auto MIN_SALARY_EXCEEDED_MSG{"Can't lower worker's salary below minimum salary."};
     static constexpr auto NO_SALARIES_MSG{"The factory can't afford workers' salaries. Please be patient."};
+    static constexpr auto INVALID_WORKER_MSG{"Invalid worker received."};
+    static constexpr auto NEG_REDUCTION_MSG{"Reduction can't be negative."};
     Factory* factoryPtr{nullptr};
 
     Pini(int id, double salary, bool isBald, Factory* factoryPtr)
@@ -30,6 +32,5 @@ public:
     void paySalaries();
     void tellSentence() override{}
 };
-
 
 #endif //UNTITLED_PINI_H

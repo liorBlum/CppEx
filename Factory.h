@@ -33,6 +33,7 @@ private:
     double minSalary{5000.0};
     static constexpr auto NO_MONEY_MSG{"The factory can't afford to produce given drug."};
     static constexpr auto NO_DRUG_MSG{"The factory does not have the requested amount of the given drug."};
+    static constexpr auto NEG_PAR_MSG{"Invalid negative parameter received."};
     friend class Pini;
 
     Factory();

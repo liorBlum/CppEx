@@ -32,6 +32,10 @@ void BasicWorker::exitFactory(const Factory &factory) {
 }
 
 void BasicWorker::tellSentence() {
+    if (sentences.empty()) {
+        cout << NO_SENTENCE_MSG << endl;
+        return;
+    }
     srand(time(nullptr));
     cout << sentences[rand() % sentences.size()] << endl;
 }
@@ -41,7 +45,11 @@ double BasicWorker::getSalary() const {
 }
 
 void BasicWorker::setSalary(double newSalary) {
-    BasicWorker::salary = newSalary;
+    if (newSalary < 0)
+        cout << NEG_SALARY_MSG << endl;
+    
+    else
+        BasicWorker::salary = newSalary;
 }
 
 const string &BasicWorker::getName() const {

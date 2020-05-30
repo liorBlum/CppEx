@@ -23,6 +23,8 @@ protected:
     static constexpr auto FACTORY_CLOSED_MSG{"Factory is closed"};
     static constexpr auto ALREADY_PRESENT_MSG{"Worker is already present in factory"};
     static constexpr auto ALREADY_NOTPRESENT_MSG{"Worker is already not present in factory"};
+    static constexpr auto NEG_SALARY_MSG{"A worker's salary can't be negative"};
+    static constexpr auto NO_SENTENCE_MSG{"Worker has no sentences to tell"};
 
 public:
     BasicWorker(string name, int id, double salary, bool isBald)
